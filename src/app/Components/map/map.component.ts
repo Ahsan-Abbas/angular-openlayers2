@@ -63,7 +63,7 @@ export class MapComponent implements OnInit {
       this.gravesLayer = new VectorLayer({
         source: source,
       });
-      
+
       this.map.addLayer(this.gravesLayer);
     });
   }
@@ -91,5 +91,25 @@ export class MapComponent implements OnInit {
     const nutzungsfristende = new Date(feature.get('nutzungsfristende'));
     const today = new Date();
     return nutzungsfristende < today;
+  }
+
+  handleGravePlotsButtonClick(): void {
+    const gravesWithDeceasedStyle = new Style({
+      fill: new Fill({ color: 'green' }),
+    });
+
+    // Set the style for each feature based on the presence of deceased persons
+    this.gravesLayer.setStyle((feature: Feature) => {
+      if (this.hasDeceasedPersons(feature)) {
+        return gravesWithDeceasedStyle;
+      } else {
+        return null;
+      }
+    });
+  }
+
+  hasDeceasedPersons(feature: Feature): boolean {
+    const verstorbene = feature.get('verstorbene');
+    return verstorbene !== null && verstorbene !== undefined;
   }
 }
