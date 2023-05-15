@@ -20,6 +20,7 @@ export class MapComponent implements OnInit {
   expiredGravesClicked: boolean = false;
   expiredGravesStyle!: Style;
   gravesLayer: any;
+  showLoader!: boolean;
 
   constructor(private gravesService: GravesService) {}
 
@@ -45,7 +46,9 @@ export class MapComponent implements OnInit {
   }
 
   loadPolygonData(): void {
+    this.showLoader = true;
     this.gravesService.getGravesData().subscribe((data) => {
+      this.showLoader = false;
       console.log(data);
       const format = new GeoJSON();
       const features = format.readFeatures(data, {
