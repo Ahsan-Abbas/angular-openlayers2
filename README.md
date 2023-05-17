@@ -2,7 +2,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.6.
 
-## Openlayers / Angular 11 application with the following features:
+## Openlayers / Angular application with the following features:
 
 1. Retrieve grave data (i.e. graves, grave plot) from the API and display it on a simple OpenLayers map with OpenStreetMap background tiles.
 
